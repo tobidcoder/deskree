@@ -1,0 +1,3 @@
+dispatch:
+  - url: '*/coffee-service'
+    module: coffee-service
