@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const indexRouter = require('./controller/coffee')
 
 // defining the Express app
 const app = express();
@@ -21,25 +22,28 @@ app.use(cors());
 // adding morgan to log HTTP requests
 app.use(morgan('combined'));
 
-// defining an array to work as the database (temporary solution)
-const ads = [
-    {title: 'Hello world Tobiloba!'}
-  ];
+//coffee services router 
+app.use('/coffee-service', indexRouter);
 
-app.get('/coffee-service', (req, res) => {    
-   res.status(200).send(ads);
+//   // custom 404
+app.use((req, res, next) => {
+    return res.status(404).send({
+      success: false,
+      msg: "Route not found"
+  });
+})
+
+// Handling Errors
+app.use((err, req, res, next) => {
+  // console.log(err);
+  err.statusCode = err.statusCode || 500;
+  err.message = err.message || "Internal Server Error";
+  res.status(err.statusCode).json({
+    success: false,
+    message: err.message,
+  });
 });
 
-// custom 404
-app.use((req, res, next) => {
-  res.status(404).send("Sorry can't find that!")
-})
-
-// custom error handler
-app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(500).send('Something broke!')
-})
 
 app.listen(process.env.PORT || 8080, () => {
     console.log(`Example app listening at http://localhost:8080`);

@@ -8,6 +8,7 @@ var conn = mysql.createConnection({
   port: 8889 // Replace with your database
 }); 
  
+
 conn.connect(function(err) {
   if (err) throw err;
   console.log('Database is connected successfully !');
