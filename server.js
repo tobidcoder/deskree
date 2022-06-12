@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
- 
+
 app.use(cors());
 
 // enabling CORS for all requests
@@ -32,6 +32,7 @@ app.use(morgan('combined'));
 
 //10 requests per minute - rate limiting
 app.use(requestLimit);
+
 
 // app.get('/', (req, res) => {    
 //    res.status(200).send("Hello world Tobiloba ddd!");
