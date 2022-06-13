@@ -58,7 +58,7 @@ router.post('/add',
             });
         }
 
-        connection.query(`INSERT INTO coffee (title, description, image, ingredients) VALUES ('${req.body.title}', ${req.body.description}, ${req.body.image}, ${req.body.ingredients})`,
+        connection.query(`INSERT INTO coffee (title, description, image, ingredients) VALUES ('${req.body.title}', '${req.body.description}', '${req.body.image}', '${req.body.ingredients}')`,
             //if(err) throw err
             (err, result) => {
                 if (err) {
