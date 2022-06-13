@@ -6,6 +6,8 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const indexRouter = require('./controller/coffee')
+const port = process.env.PORT || 8080;
+
 
 // defining the Express app
 const app = express();
@@ -45,6 +47,6 @@ app.use((err, req, res, next) => {
 });
 
 
-app.listen(process.env.PORT || 8080, () => {
-    console.log(`Example app listening at http://localhost:8080`);
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
 });

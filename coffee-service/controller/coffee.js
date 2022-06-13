@@ -4,17 +4,14 @@ const connection = require('../dbConnection');
 const { body, validationResult } = require('express-validator');
 const helper = require('../helper');
 
-
 router.get('/', function (req, res, next) {
 
-var page = 1
-var listPerPage = 10
+var page = req.query.page || 1
+var listPerPage = req.query.listPerPage || 10
+
+console.log('listPerPage', listPerPage,page);
 
 const offset = helper.getOffset(page, listPerPage);
-//   const rows = await db.query(
-//     `SELECT id, title, description, image, ingredients
-//     FROM coffee LIMIT ${offset},${listPerPage}`
-//   );
 
      connection.query(`SELECT id, title, description, image, ingredients
     FROM coffee LIMIT ${offset},${listPerPage}`, function (err, rows) {
@@ -70,7 +67,7 @@ router.post('/add',
                     return res.status(200).send({
                         success: true,
                         msg: 'Coffee created successfully!',
-                        data: result
+                        data: req.body
                     });
                 }
             }
