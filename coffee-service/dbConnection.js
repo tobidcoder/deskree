@@ -6,10 +6,10 @@ var conn = mysql.createConnection({
   password: 'root',      // Replace with your database password
   database: 'deskree', // // Replace with your database Name
   port: 8889 // Replace with your database
-}); 
- 
+});
 
-conn.connect(function(err) {
+
+conn.connect(function (err) {
   if (err) throw err;
   console.log('Database is connected successfully !');
 });
