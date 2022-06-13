@@ -74,4 +74,23 @@ router.post('/add',
         );
     });
 
+    router.get('/search?', function(req, res, next) {
+        var title = req.query.title;
+        var sql = `SELECT * from coffee WHERE title LIKE '%${title}%' `; 
+        connection.query(sql, [title], function (err, results, fields) {
+            if (err) {
+                return res.status(400).send({
+                    success: false,
+                    msg: err
+                });
+            } else {
+                return res.status(200).send({
+                    success: true,
+                    msg:  `${title} get successfully!`,
+                    data: results
+                });
+            }
+        });
+    });
+
 module.exports = router
