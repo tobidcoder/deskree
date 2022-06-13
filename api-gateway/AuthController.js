@@ -141,7 +141,7 @@ router.post('/login',
     );
 });
 
-router.get('/', signupValidation, (req, res, next) => {
+router.get('/me', signupValidation, (req, res, next) => {
     if (
         !req.headers.authorization ||
         !req.headers.authorization.startsWith('Bearer') ||

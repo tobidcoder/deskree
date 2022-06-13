@@ -9,6 +9,8 @@ const createError = require('http-errors');
 const path = require('path');
 const {requestLimit} = require('./api-gateway/rateLimiter')
 const indexRouter = require('./api-gateway/AuthController');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const port = process.env.PORT || 8080;
 // defining the Express app
 const app = express();
@@ -37,24 +39,46 @@ app.use(requestLimit);
 //    res.status(200).send("Hello world Tobiloba ddd!");
 // });
 
-// app.use((req, res, next) => {
-//     console.log('Time:', Date.now())
-//     next()
-//   })
-
+//User register, login and get user object endpoint.
 app.use('/api', indexRouter);
 
-// custom 404
+//checking API AUTH
 app.use((req, res, next) => {
-    res.status(404).send("Sorry can't find that!")
+    if (
+        !req.headers.authorization ||
+        !req.headers.authorization.startsWith('Bearer') ||
+        !req.headers.authorization.split(' ')[1]
+    ) {
+        return res.status(422).json({
+            success: false,
+            message: "Authorization token is required",
+        });
+    }
+    const theToken = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(theToken, 'the-super-strong-secrect');
+    // if (error) throw error;
+    if(!decoded){
+        return res.send({ success: false, message: 'Please provide valid credentials' });
+    }
+    next()
+  })
+
+
+  // custom 404
+app.use((req, res, next) => {
+    return res.status(404).send({
+        success: false,
+        msg: "Route not found"
+    });
 })
-  
+
 // Handling Errors
 app.use((err, req, res, next) => {
     // console.log(err);
     err.statusCode = err.statusCode || 500;
     err.message = err.message || "Internal Server Error";
     res.status(err.statusCode).json({
+      success: false,
       message: err.message,
     });
 });
