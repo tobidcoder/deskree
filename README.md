@@ -5,12 +5,11 @@
 # Main service
 SETTING UP GCP ON YOUR SYSTERM
 1. Download and Install python
-2. Install gcloud i.e brew install --cask google-cloud-SDK
-3. Then initiate gcloud 
-4. gcloud init
-5. Login 
-6. Choose project or enter project id or create a new project
-7. Run: gcloud compute --zone and --region flag to set your zone and region
+2. Install gcloud e.g brew install --cask google-cloud-SDK
+3. Then initiate gcloud gcloud init
+4. Login 
+5. Choose project or enter project id or create a new project
+6. Run: gcloud compute --zone and --region flag to set your zone and region
 * For help run : gcloud help config
 * Run `gcloud --help` to see the Cloud Platform services you can interact with. 
 * And run `gcloud help COMMAND` to get help on any gcloud command.
@@ -18,7 +17,7 @@ SETTING UP GCP ON YOUR SYSTERM
 * Run `gcloud cheat-sheet` to see a roster of go-to `gcloud` commands.
 After setting up your project
 
-8. Run: `gcloud app deploys` to deploy your application. 
+7. Run: `gcloud app deploys` to deploy your application. 
 Note: make sure you have your app.yaml in your base directory. 
 
 # Adding new service
@@ -67,8 +66,8 @@ const app = express(); app.get('/', (req, res) => {
 ```
 9. We’re not done yet, but let’s deploy this service to see what happens. To deploy a microservice, you can run gcloud app deploy inside of the microservice’s directory or gcloud app deploy service-name/app.yaml from the main app’s directory.
 10. If you run gcloud app browse -s service-name, a browser window will open on a subdomain of your default service’s URL. Every service automatically gets a subdomain that can be accessed by going to the URL.
-11. We want our service-name service to be accessible from /service-name url instead of the subdomain. We can configure routing for our default app by creating a dispatch.yaml file.
-dispatch:
+11. We want our service-name service to be accessible from /service-name url instead of the subdomain. We can configure routing for our default app by adding this dispatch.yaml file on main service.
+add to dispatch file:
 ```bash
   - url: '*/service-name'
     module: service-name
