@@ -1,3 +1,7 @@
+## POSTMAN COLLECTION LINK
+
+ https://www.getpostman.com/collections/da1de12b7a16cfbdbf35
+
 # Main service
 SETTING UP GCP ON YOUR SYSTERM
 1. Download and Install python
@@ -47,11 +51,12 @@ GAE uses the node start command to start the server. This command looks for the 
 ```
 GAE uses app.yaml file as a default entry point into your application. This file tells GAE the runtime to use for the project and the environment configuration.
 7. To tell GAE that you’re creating another service, you must provide a service name in the app.yaml file of your microservice.
+
 ```bash
       env: flex
       runtime: nodejs
      service: service-name
-     ```
+```
 app.yaml does not need to be called app.yaml. You could call it admin.yaml as long as service: service-name property is set, GAE will know that you’re deploying a microservice and not the default service. Using app.yaml makes it possible to run gcloud app deploy inside of service-name directory and gcloud command will look for app.yaml automatically.
 8. Create a server.js for the service-name section.
 ```bash
@@ -67,7 +72,7 @@ dispatch:
 ```bash
   - url: '*/service-name'
     module: service-name
-    ```
+```
 12. The dispatch configuration tells GAE how to route requests inside of your application. It doesn’t do any rewriting of URLs. So our server must explicitly listen to requests on /service-name. Let’s modify service-name/server.js to handle /service-name url.
 ```bash
 "use strict";const express = require('express');

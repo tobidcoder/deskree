@@ -5,11 +5,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const createError = require('http-errors');
-const path = require('path');
 const {requestLimit} = require('./api-gateway/rateLimiter')
 const indexRouter = require('./api-gateway/AuthController');
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const port = process.env.PORT || 8080;
 // defining the Express app
