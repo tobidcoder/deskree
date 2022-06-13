@@ -1,6 +1,6 @@
-## POSTMAN COLLECTION LINK
+## RUN IN POSTMAN LINK
 
- https://www.getpostman.com/collections/da1de12b7a16cfbdbf35
+https://app.getpostman.com/run-collection/da1de12b7a16cfbdbf35?action=collection%2Fimport
 
 # Main service
 SETTING UP GCP ON YOUR SYSTERM
